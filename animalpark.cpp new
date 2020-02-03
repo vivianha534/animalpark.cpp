@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//petExsist not done
+bool allowedCharacters(string animalparkString) {
+	for (int i = 0; i < animalparkString.size(); i++) {
+		if (tolower(animalparkString[i]) == 'p' || tolower(animalparkString[i]) == 'c' || tolower(animalparkString[i]) == 'd'|| animalparkString[i] == '+' || animalparkString[i] == '-') {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+}
+bool front(string animalparkString) {
+	switch (animalparkString[0]) {
+		case 'C':
+		case 'c':
+		case 'D':
+		case 'd':
+			return true;
+		default:
+			return false;
+	}
+}
+bool space(string animalparkString) {
+	for (int i = 0; i < animalparkString.size(); i++) {
+		if (tolower(animalparkString[i]) != 'c' || tolower(animalparkString[i]) != 'd' || animalparkString[i] != '+' || animalparkString[i] != '-')  {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+}
+bool petsCantEnterAlone(string animalparkString) {
+	int consecutiveAnimals = 1;
+	for (int i = 0; i < animalparkString.size(); i++) {
+		consecutiveAnimals = 1;
+		if (i != animalparkString.size() - 1 && tolower(animalparkString[i + consecutiveAnimals]) == tolower(animalparkString[i])) {
+			consecutiveAnimals++;
+			continue;
+		}
+		else if (i != 0 && tolower(animalparkString[i + consecutiveAnimals]) == tolower(animalparkString[i]) == 'p') {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+} 
+
+
+bool isValidAnimalParkString(string animalparkString) {
+	if (allowedCharacters(animalparkString) == true && front(animalparkString) && space(animalparkString) == true) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+
+}
+
+int main() {
+	cout.setf(ios::boolalpha);
+	string animalparkString;
+	getline(cin, animalparkString);
+	cout << isValidAnimalParkString(animalparkString);
+}
